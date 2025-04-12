@@ -24,7 +24,7 @@ Clone the forked repository to your local machine:
   for AWS MLOps and Jenkins
   clone infra folder
   and run terraform scripts
-  any queries: bigdatachn@gmail.com
+  any queries: bigdatachn@gmail.com ,Ashraf
   
   
   
