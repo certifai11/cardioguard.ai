@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Assessment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1><i class="fas fa-heartbeat me-2"></i> Heart Disease Risk Assessment</h1>
+                <div>
+                    <button class="btn btn-outline-light" id="about-btn">
+                        <i class="fas fa-info-circle me-1"></i> About
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <div class="dashboard-metrics">
+            <div class="metric-card">
+                <div class="metric-icon text-primary">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="metric-value" id="assessments-count">0</div>
+                <div class="metric-label">Assessments Completed</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon text-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="metric-value" id="high-risk-count">0</div>
+                <div class="metric-label">High Risk Detected</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon text-warning">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="metric-value" id="moderate-risk-count">0</div>
+                <div class="metric-label">Moderate Risk Detected</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon text-success">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="metric-value" id="low-risk-count">0</div>
+                <div class="metric-label">Low Risk Detected</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="assessment-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h2><i class="fas fa-clipboard-list me-2"></i> Patient Assessment Form</h2>
+                        <button class="btn btn-sm btn-outline-light" id="clear-form-btn">
+                            <i class="fas fa-eraser me-1"></i> Clear Form
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form id="assessment-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="age" class="form-label">Age</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                            <input type="number" class="form-control" id="age" name="age" min="20" max="100" required>
+                                        </div>
+                                        <div class="feature-info">Patient's age (20-100 years)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Sex</label>
+                                        <div class="d-flex">
+                                            <div class="form-check me-3">
+                                                <input class="form-check-input" type="radio" name="sex" id="sex-male" value="1" required>
+                                                <label class="form-check-label" for="sex-male">Male</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="sex" id="sex-female" value="0">
+                                                <label class="form-check-label" for="sex-female">Female</label>
+                                            </div>
+                                        </div>
+                                        <div class="feature-info">Patient's biological sex (1 = male, 0 = female)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="cp" class="form-label">Chest Pain Type</label>
+                                        <select class="form-select" id="cp" name="cp" required>
+                                            <option value="" selected disabled>Select type</option>
+                                            <option value="0">Typical Angina (0)</option>
+                                            <option value="1">Atypical Angina (1)</option>
+                                            <option value="2">Non-anginal Pain (2)</option>
+                                            <option value="3">Asymptomatic (3)</option>
+                                        </select>
+                                        <div class="feature-info">Type of chest pain experienced (0-3)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="trestbps" class="form-label">Resting Blood Pressure</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-heart"></i></span>
+                                            <input type="number" class="form-control" id="trestbps" name="trestbps" min="90" max="200" required>
+                                            <span class="input-group-text">mm Hg</span>
+                                        </div>
+                                        <div class="feature-info">Resting blood pressure (90-200 mm Hg)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="chol" class="form-label">Cholesterol</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                            <input type="number" class="form-control" id="chol" name="chol" min="120" max="600" required>
+                                            <span class="input-group-text">mg/dl</span>
+                                        </div>
+                                        <div class="feature-info">Serum cholesterol (120-600 mg/dl)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="fbs" class="form-label">Fasting Blood Sugar</label>
+                                        <select class="form-select" id="fbs" name="fbs" required>
+                                            <option value="" selected disabled>Select option</option>
+                                            <option value="1">Greater than 120 mg/dl (1)</option>
+                                            <option value="0">Less than or equal to 120 mg/dl (0)</option>
+                                        </select>
+                                        <div class="feature-info">Fasting blood sugar > 120 mg/dl (1 = true, 0 = false)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="restecg" class="form-label">Resting ECG</label>
+                                        <select class="form-select" id="restecg" name="restecg" required>
+                                            <option value="" selected disabled>Select result</option>
+                                            <option value="0">Normal (0)</option>
+                                            <option value="1">ST-T Wave Abnormality (1)</option>
+                                            <option value="2">Left Ventricular Hypertrophy (2)</option>
+                                        </select>
+                                        <div class="feature-info">Resting electrocardiographic results (0-2)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="thalach" class="form-label">Maximum Heart Rate</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-heartbeat"></i></span>
+                                            <input type="number" class="form-control" id="thalach" name="thalach" min="70" max="220" required>
+                                            <span class="input-group-text">bpm</span>
+                                        </div>
+                                        <div class="feature-info">Maximum heart rate achieved (70-220 bpm)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="exang" class="form-label">Exercise Induced Angina</label>
+                                        <select class="form-select" id="exang" name="exang" required>
+                                            <option value="" selected disabled>Select option</option>
+                                            <option value="1">Yes (1)</option>
+                                            <option value="0">No (0)</option>
+                                        </select>
+                                        <div class="feature-info">Exercise induced angina (1 = yes, 0 = no)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="oldpeak" class="form-label">ST Depression</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
+                                            <input type="number" step="0.1" class="form-control" id="oldpeak" name="oldpeak" min="0" max="6.2" required>
+                                        </div>
+                                        <div class="feature-info">ST depression induced by exercise relative to rest (0-6.2)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="slope" class="form-label">ST Segment Slope</label>
+                                        <select class="form-select" id="slope" name="slope" required>
+                                            <option value="" selected disabled>Select slope</option>
+                                            <option value="0">Upsloping (0)</option>
+                                            <option value="1">Flat (1)</option>
+                                            <option value="2">Downsloping (2)</option>
+                                        </select>
+                                        <div class="feature-info">Slope of the peak exercise ST segment (0-2)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="ca" class="form-label">Number of Major Vessels</label>
+                                        <select class="form-select" id="ca" name="ca" required>
+                                            <option value="" selected disabled>Select number</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <div class="feature-info">Number of major vessels colored by fluoroscopy (0-4)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="thal" class="form-label">Thalassemia</label>
+                                        <select class="form-select" id="thal" name="thal" required>
+                                            <option value="" selected disabled>Select type</option>
+                                            <option value="0">Normal (0)</option>
+                                            <option value="1">Fixed Defect (1)</option>
+                                            <option value="2">Reversible Defect (2)</option>
+                                            <option value="3">Other (3)</option>
+                                        </select>
+                                        <div class="feature-info">Thalassemia type (0-3)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="fas fa-undo me-1"></i> Reset
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-heartbeat me-1"></i> Assess Risk
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div id="result-container" class="result-box mt-4" style="display: none;">
+                            <h4 id="result-title" class="mb-3">Assessment Result</h4>
+                            <div id="result-description"></div>
+                            
+                            <div class="mt-3">
+                                <p class="mb-1">Risk Level:</p>
+                                <div class="risk-meter">
+                                    <div id="risk-level" class="risk-level" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <h5>Key Factors:</h5>
+                                <ul id="risk-factors"></ul>
+                            </div>
+                            
+                            <div class="mt-4 text-center">
+                                <p class="fw-bold">NOTE: This is a screening tool only. Please consult with a healthcare professional for proper diagnosis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="assessment-card simulator-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-random me-2"></i> Simulator</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Use predefined test cases to quickly assess the model's predictions.</p>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Select Test Case:</label>
+                            <select class="form-select" id="simulator-select">
+                                <option value="" selected disabled>Choose a case</option>
+                                <option value="high-risk">High Risk Patient</option>
+                                <option value="moderate-risk">Moderate Risk Patient</option>
+                                <option value="low-risk">Low Risk Patient</option>
+                                <option value="random">Random Patient</option>
+                            </select>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button class="btn btn-primary" id="simulator-btn" disabled>
+                                <i class="fas fa-play me-1"></i> Run Simulation
+                            </button>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="mb-3">
+                            <h5><i class="fas fa-sliders-h me-2"></i> Parameter Tuning</h5>
+                            <p class="small">Adjust prediction threshold to balance sensitivity and specificity.</p>
+                            
+                            <label for="threshold-slider" class="form-label">Prediction Threshold: <span id="threshold-value">0.5</span></label>
+                            <input type="range" class="form-range" min="0.1" max="0.9" step="0.05" value="0.5" id="threshold-slider">
+                            
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <div class="small text-muted">Lower threshold: Higher sensitivity</div>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <div class="small text-muted">Higher threshold: Higher specificity</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="assessment-card mt-4">
+                    <div class="card-header">
+                        <h3><i class="fas fa-info-circle me-2"></i> Feature Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Understanding key factors for heart disease prediction:</p>
+                        
+                        <div class="accordion" id="featureAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                        Age and Sex
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body">
+                                        <p>Age is a significant risk factor for heart disease. Risk increases with age, especially after 45 for men and 55 for women.</p>
+                                        <p>Men generally have a higher risk than women of the same age. After menopause, women's risk increases closer to men's.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                        Chest Pain Types
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body">
+                                        <ul>
+                                            <li><strong>Typical Angina (0):</strong> Chest pain related to decreased blood supply to the heart.</li>
+                                            <li><strong>Atypical Angina (1):</strong> Chest pain not related to heart.</li>
+                                            <li><strong>Non-anginal Pain (2):</strong> Non-specific chest pain.</li>
+                                            <li><strong>Asymptomatic (3):</strong> No chest pain.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                        Blood Pressure
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body">
+                                        <p>Normal resting blood pressure is typically around 120/80 mm Hg.</p>
+                                        <p>High blood pressure (hypertension) increases strain on the heart and can lead to heart disease.</p>
+                                        <ul>
+                                            <li>Normal: Less than 120/80 mm Hg</li>
+                                            <li>Elevated: 120-129/less than 80 mm Hg</li>
+                                            <li>Hypertension Stage 1: 130-139/80-89 mm Hg</li>
+                                            <li>Hypertension Stage 2: 140/90 mm Hg or higher</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Heart Disease Risk Assessment Tool</h4>
+                    <p>This tool is intended for educational purposes only and should not replace professional medical advice.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2025 Heart Health Analytics</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Audio elements for alerts -->
+    <audio id="high-risk-audio" preload="auto">
+        <source src="{{ url_for('static', filename='sounds/alert.mp3') }}" type="audio/mpeg">
+    </audio>
+    <audio id="moderate-risk-audio" preload="auto">
+        <source src="{{ url_for('static', filename='sounds/warning.mp3') }}" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/simulator.js') }}"></script>
+</body>
+</html>

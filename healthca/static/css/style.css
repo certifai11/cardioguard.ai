@@ -1,0 +1,429 @@
+/* Global Styles */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --low-risk-color: #28a745;
+    --moderate-risk-color: #ffc107;
+    --high-risk-color: #dc3545;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f7f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Card Styles */
+  .card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    background-color: #fff;
+    border: none;
+  }
+  
+  .card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .bg-primary {
+    background-color: var(--primary-color) !important;
+  }
+  
+  .text-white {
+    color: #fff !important;
+  }
+  
+  /* Result Indicator */
+  .result-indicator {
+    text-align: center;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+  }
+  
+  .result-indicator.low-risk {
+    background-color: rgba(40, 167, 69, 0.15);
+    border-left: 5px solid var(--low-risk-color);
+  }
+  
+  .result-indicator.moderate-risk {
+    background-color: rgba(255, 193, 7, 0.15);
+    border-left: 5px solid var(--moderate-risk-color);
+  }
+  
+  .result-indicator.high-risk {
+    background-color: rgba(220, 53, 69, 0.15);
+    border-left: 5px solid var(--high-risk-color);
+  }
+  
+  .result-title {
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .risk-probability {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+  
+  .fw-bold {
+    font-weight: 700 !important;
+  }
+  
+  /* Risk Meter */
+  .risk-meter {
+    margin-bottom: 2rem;
+  }
+  
+  .risk-meter-label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+  }
+  
+  .d-flex {
+    display: flex !important;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between !important;
+  }
+  
+  .risk-meter-bar {
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .risk-level {
+    height: 100%;
+    background-color: var(--moderate-risk-color);
+    border-radius: 10px;
+    width: 75%; /* Default value, will be overridden by JavaScript */
+    transition: width 0.6s ease, background-color 0.6s ease;
+  }
+  
+  /* Risk Factors */
+  .risk-factors {
+    padding-left: 1.5rem;
+  }
+  
+  .risk-factors li {
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  
+  .risk-factors li:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Recommendations */
+  .recommendations {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 6px;
+  }
+  
+  .recommendation-content {
+    margin-top: 1rem;
+  }
+  
+  /* Utility Classes */
+  .mt-1 { margin-top: 0.25rem !important; }
+  .mt-2 { margin-top: 0.5rem !important; }
+  .mt-3 { margin-top: 1rem !important; }
+  .mt-4 { margin-top: 1.5rem !important; }
+  .mt-5 { margin-top: 3rem !important; }
+  
+  .mb-0 { margin-bottom: 0 !important; }
+  .mb-1 { margin-bottom: 0.25rem !important; }
+  .mb-2 { margin-bottom: 0.5rem !important; }
+  .mb-3 { margin-bottom: 1rem !important; }
+  .mb-4 { margin-bottom: 1.5rem !important; }
+  .mb-5 { margin-bottom: 3rem !important; }
+  
+  .p-1 { padding: 0.25rem !important; }
+  .p-2 { padding: 0.5rem !important; }
+  .p-3 { padding: 1rem !important; }
+  .p-4 { padding: 1.5rem !important; }
+  .p-5 { padding: 3rem !important; }
+  
+  .rounded { border-radius: 0.25rem !important; }
+  .bg-light { background-color: var(--light-color) !important; }
+  .text-center { text-align: center !important; }
+  
+  /* JavaScript will use this to update the color based on the risk percentage */
+  [data-risk="low"] .risk-level {
+    background-color: var(--low-risk-color);
+  }
+  
+  [data-risk="moderate"] .risk-level {
+    background-color: var(--moderate-risk-color);
+  }
+  
+  [data-risk="high"] .risk-level {
+    background-color: var(--high-risk-color);
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .risk-meter-label span {
+      font-size: 0.8rem;
+    }
+    
+    .card-body {
+      padding: 1rem;
+    }
+    
+    .risk-probability {
+      font-size: 1rem;
+    }
+
+  .header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.header .container h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.header .container .btn-outline-light {
+    border-color: white;
+    color: white;
+}
+
+.header .container .btn-outline-light:hover {
+    background-color: white;
+    color: #007bff;
+}
+
+main.container {
+    flex-grow: 1;
+}
+
+.dashboard-metrics {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.metric-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    text-align: center;
+    flex: 1 0 150px; /* Minimum width for each card */
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.assessment-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+}
+
+.assessment-card .card-header {
+    background-color: #e9ecef;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assessment-card .card-header h2,
+.assessment-card .card-header h3 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.assessment-card .card-body {
+    padding: 1.5rem;
+}
+
+.assessment-card .card-body .form-label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.assessment-card .card-body .form-select,
+.assessment-card .card-body .form-control {
+    margin-bottom: 0.75rem;
+}
+
+.assessment-card .card-body .feature-info {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+.result-box {
+    border: 1px solid #ced4da;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #f8f9fa;
+}
+
+.result-box h4 {
+    color: #28a745;
+}
+
+.risk-meter {
+    background-color: #e9ecef;
+    height: 1rem;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.risk-level {
+    background-color: #ffc107; /* Default moderate color */
+    height: 100%;
+    width: 0%;
+    border-radius: 0.25rem;
+}
+
+.risk-level.low {
+    background-color: #28a745;
+}
+
+.risk-level.moderate {
+    background-color: #ffc107;
+}
+
+.risk-level.high {
+    background-color: #dc3545;
+}
+
+#risk-factors {
+    padding-left: 1rem;
+    margin-bottom: 0;
+}
+
+#risk-factors li {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.simulator-card p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+#threshold-value {
+    font-weight: bold;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #007bff;
+    background-color: #e7f1ff;
+}
+
+.accordion-button:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.accordion-item {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.accordion-header button {
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: white;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+.accordion-header button:focus {
+    box-shadow: none;
+}
+
+.accordion-body {
+    padding: 1rem;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+footer .container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+footer h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+footer p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-metrics {
+        flex-direction: column;
+    }
+    .metric-card {
+        flex-basis: auto;
+    }
+}
+  }

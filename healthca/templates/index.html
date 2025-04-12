@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Assessment - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-color: #ff6600; /* Orange Red */
+            --secondary-color: #6c757d;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --success-color: #198754;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), #cc5200); /* Darker shade for gradient */
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(255, 102, 0, 0.8), rgba(204, 82, 0, 0.9)), url('/api/placeholder/1200/400') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            height: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .cta-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-app-section {
+            padding: 4rem 0;
+            background-color: #f1f5f9;
+        }
+
+        .mobile-app-img {
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .risk-level-card {
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .high-risk {
+            background-color: var(--danger-color);
+        }
+
+        .moderate-risk {
+            background-color: var(--warning-color);
+            color: #212529;
+        }
+
+        .low-risk {
+            background-color: var(--success-color);
+        }
+
+        .wearable-device-img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: #f8f9fa;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background-color: #cc5200; /* Darker shade for hover */
+            border-color: #cc5200;
+        }
+
+        .btn-outline-light:hover {
+            color: var(--primary-color);
+            background-color: white;
+        }
+
+        .stats-counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-label {
+            font-size: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .stats-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1><i class="fas fa-heartbeat me-2"></i> Heart Disease Risk Assessment</h1>
+                <div>
+                    <a href="/assessment" class="btn btn-outline-light me-2">
+                        <i class="fas fa-clipboard-list me-1"></i> Assessment
+                    </a>
+                    <a href="/about" class="btn btn-outline-light">
+                        <i class="fas fa-info-circle me-1"></i> About
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <h2>Take Control of Your Heart Health</h2>
+            <p>Our advanced risk assessment tool helps you understand your risk factors for heart disease and provides personalized recommendations for a healthier heart.</p>
+            <a href="/assessment" class="btn btn-light btn-lg">
+                <i class="fas fa-heartbeat me-2"></i> Start Your Assessment
+            </a>
+        </div>
+    </section>
+
+    <section class="container mt-5">
+        <div class="row mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="stats-card">
+                    <div class="stats-counter">86%</div>
+                    <div class="stats-label">Model Accuracy</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="stats-card">
+                    <div class="stats-counter">13</div>
+                    <div class="stats-label">Clinical Parameters</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="stats-card">
+                    <div class="stats-counter">10+</div>
+                    <div class="stats-label">Years of Research</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-lg-6">
+                <h2 class="mb-4">Why Use Our Heart Risk Assessment?</h2>
+                <p class="lead">Heart disease remains the leading cause of death worldwide. Early detection and prevention are key to reducing your risk.</p>
+                <p>Our evidence-based tool analyzes multiple risk factors to provide you with a comprehensive assessment of your heart health status.</p>
+                <div class="d-flex mt-4">
+                    <div class="me-4">
+                        <i class="fas fa-check-circle text-success me-2"></i> Clinically validated
+                    </div>
+                    <div>
+                        <i class="fas fa-check-circle text-success me-2"></i> Easy to use
+                    </div>
+                </div>
+                <div class="d-flex mt-2">
+                    <div class="me-4">
+                        <i class="fas fa-check-circle text-success me-2"></i> Instant results
+                    </div>
+                    <div>
+                        <i class="fas fa-check-circle text-success me-2"></i> Free to use
+                    </div>
+                </div>
+                <a href="/assessment" class="btn btn-primary mt-4">Take Assessment Now</a>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                <img src="static\img\cardibg.JPG" alt="Heart health illustration" class="img-fluid rounded">
+            </div>
+        </div>
+
+        <h2 class="text-center mb-5">Our Features</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Comprehensive Risk Analysis</h3>
+                    <p>Our assessment tool evaluates 13 different clinical parameters to provide a thorough analysis of your heart disease risk.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Advanced Analytics</h3>
+                    <p>Powered by machine learning algorithms trained on clinical data, our tool offers insights backed by medical research.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-medical-alt"></i>
+                    </div>
+                    <h3>Personalized Recommendations</h3>
+                    <p>Receive tailored advice based on your risk factors to help improve your heart health and reduce your risk.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mobile-app-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <h2 class="mb-4">CardioGuard Mobile App</h2>
+                    <p class="lead">Take your heart health monitoring to the next level with our mobile application.</p>
+                    <p>Our companion mobile app allows you to track your heart health metrics, receive alerts for potential risks, and monitor your progress over time.</p>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mb-2"><i class="fas fa-mobile-alt text-primary me-2"></i> Real-time monitoring</li>
+                        <li class="mb-2"><i class="fas fa-bell text-primary me-2"></i> Risk alerts and notifications</li>
+                        <li class="mb-2"><i class="fas fa-history text-primary me-2"></i> Track progress over time</li>
+                        <li><i class="fas fa-sync text-primary me-2"></i> Sync with wearable devices</li>
+                    </ul>
+                    <button class="btn btn-primary mt-4">
+                        <i class="fab fa-apple me-2"></i> Download on App Store
+                    </button>
+                    <button class="btn btn-outline-primary mt-4 ms-2">
+                        <i class="fab fa-google-play me-2"></i> Get on Google Play
+                    </button>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row">
+                        
+                        <div class="col-6 text-center" style="margin-left: 100px;">
+                            <img src="static\img\risk2.png" alt="CardioGuard app heart screen" class="mobile-app-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-5">
+        <h2 class="text-center mb-5">Understanding Risk Levels</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="risk-level-card high-risk">
+                    <h3><i class="fas fa-exclamation-triangle me-2"></i> High Risk</h3>
+                    <p>Risk probability ≥70%</p>
+                </div>
+                <p>A high-risk result indicates a significant probability of coronary heart disease. Consult with a healthcare professional as soon as possible.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="risk-level-card moderate-risk">
+                    <h3><i class="fas fa-exclamation-circle me-2"></i> Moderate Risk</h3>
+                    <p>Risk probability 50-69%</p>
+                </div>
+                <p>A moderate-risk result suggests concerning factors that may increase heart disease risk. Discuss these results with your healthcare provider.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="risk-level-card low-risk">
+                    <h3><i class="fas fa-check-circle me-2"></i> Low Risk</h3>
+                    <p>Risk probability <50%</p>
+                </div>
+                <p>A low-risk result suggests current risk factors do not strongly indicate heart disease. Maintain heart-healthy habits and regular check-ups.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                <h2 class="mb-4">Wearable Health Technology</h2>
+                <p class="lead">Enhance your heart health monitoring with wearable devices.</p>
+                <p>Our assessment tool integrates with popular wearable health devices to provide continuous monitoring and more accurate risk assessments based on real-time data.</p>
+                <p>Compatible wearable devices can track:</p>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-heartbeat text-danger me-3 fa-2x"></i>
+                            <div>Heart Rate</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-running text-primary me-3 fa-2x"></i>
+                            <div>Activity Levels</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-bed text-info me-3 fa-2x"></i>
+                            <div>Sleep Patterns</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-tachometer-alt text-warning me-3 fa-2x"></i>
+                            <div>Blood Pressure</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <img src="static\img\watch.png" alt="Wearable health device" class="img-fluid rounded">
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section mt-5">
+        <div class="container">
+            <h2>Ready to Check Your Heart Health?</h2>
+            <p class="lead mb-4">It takes less than 5 minutes to complete the assessment and get your results.</p>
+            <a href="/assessment" class="btn btn-light btn-lg">
+                <i class="fas fa-heartbeat me-2"></i> Start Your Assessment Now
+            </a>
+        </div>
+    </section>
+
+    <section class="container mt-5">
+        <h2 class="text-center mb-5">What Our Users Say</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card text-center">
+                    <img src="/api/placeholder/150/150" alt="User testimonial" class="testimonial-img">
+                    <p class="mt-3">"The assessment tool helped me identify risk factors I wasn't aware of. After consulting with my doctor, I made lifestyle changes that improved my heart health."</p>
+                    <h5 class="mt-3">Michael T.</h5>
+                    <p class="text-muted">Age 52</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card text-center">
+                    <img src="/api/placeholder/150/150" alt="User testimonial" class="testimonial-img">
+                    <p class="mt-3">"As someone with a family history of heart disease, this tool has been invaluable for monitoring my risk factors and discussing them with my cardiologist."</p>
+                    <h5 class="mt-3">Sarah L.</h5>
+                    <p class="text-muted">Age 45</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card text-center">
+                    <img src="/api/placeholder/150/150" alt="User testimonial" class="testimonial-img">
+                    <p class="mt-3">"The clear explanations of each risk factor helped me understand what lifestyle changes would have the biggest impact on improving my heart health."</p>
+                    <h5 class="mt-3">Robert K.</h5>
+                    <p class="text-muted">Age 60</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Heart Disease Risk Assessment Tool</h4>
+                    <p>This tool is intended for educational purposes only and should not replace professional medical advice.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2025 Heart Health Analytics</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple animation for stats counters
+        document.addEventListener('DOMContentLoaded', function() {
+            // Placeholder function to animate counters
+            const counters = document.querySelectorAll('.stats-counter');
+            
+            counters.forEach(counter => {
+                const target = parseFloat(counter.innerText);
+                let count = 0;
+                const increment = target / 40; // Divide by animation steps
+                
+                const updateCount = () => {
+                    if(count < target) {
+                        count += increment;
+                        counter.innerText = count > target ? target : count.toFixed(target % 1 === 0 ? 0 : 1);
+                        setTimeout(updateCount, 50);
+                    } else {
+                        counter.innerText = target;
+                    }
+                }
+                
+                updateCount();
+            });
+        });
+    </script>
+</body>
+</html>

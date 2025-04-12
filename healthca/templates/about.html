@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Heart Disease Risk Assessment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1><i class="fas fa-heartbeat me-2"></i> Heart Disease Risk Assessment</h1>
+                <div>
+                    <a href="/" class="btn btn-outline-light">
+                        <i class="fas fa-home me-1"></i> Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2><i class="fas fa-info-circle me-2"></i> About This Tool</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3>Purpose</h3>
+                        <p>
+                            The Heart Disease Risk Assessment Tool is designed to provide an initial screening for heart disease risk factors. 
+                            It uses a machine learning model trained on clinical data to estimate the probability of heart disease based on various patient parameters.
+                        </p>
+                        
+                        <h3>How It Works</h3>
+                        <p>
+                            Our tool uses a supervised machine learning model that has been trained on the Cleveland Heart Disease dataset from the UCI Machine Learning Repository. 
+                            The model analyzes 13 clinical parameters to estimate the probability of coronary heart disease.
+                        </p>
+                        
+                        <div class="alert alert-warning">
+                            <strong>Important:</strong> This tool is intended for educational and informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+                        </div>
+                        
+                        <h3>Key Features Used in the Model</h3>
+                        <ul>
+                            <li>
+                                <strong>Age and Sex</strong>: Basic demographic information that influences heart disease risk
+                            </li>
+                            <li>
+                                <strong>Chest Pain Type</strong>: The type of chest pain experienced, categorized into four types
+                            </li>
+                            <li>
+                                <strong>Blood Pressure and Cholesterol</strong>: Key cardiovascular health metrics
+                            </li>
+                            <li>
+                                <strong>ECG Results</strong>: Electrical activity of the heart at rest
+                            </li>
+                            <li>
+                                <strong>Maximum Heart Rate</strong>: Highest heart rate achieved during exercise
+                            </li>
+                            <li>
+                                <strong>Exercise-Induced Angina</strong>: Chest pain caused by physical exertion
+                            </li>
+                            <li>
+                                <strong>ST Depression</strong>: Measure of abnormality in ECG during exercise
+                            </li>
+                            <li>
+                                <strong>Number of Major Vessels</strong>: Number of major blood vessels colored by fluoroscopy
+                            </li>
+                            <li>
+                                <strong>Thalassemia</strong>: Blood disorder that can affect heart function
+                            </li>
+                        </ul>
+                        
+                        <h3>Model Performance</h3>
+                        <p>
+                            Our model achieves approximately 86% accuracy on test data, with a balanced precision and recall. 
+                            The model was validated using 10-fold cross-validation to ensure robustness.
+                        </p>
+                        
+                        <h3>Limitations</h3>
+                        <p>
+                            While this tool can provide a risk assessment based on the provided information, it has several limitations:
+                        </p>
+                        <ul>
+                            <li>It is not a diagnostic tool and cannot definitively determine whether you have heart disease</li>
+                            <li>It does not consider all possible risk factors for heart disease</li>
+                            <li>The model is trained on historical data which may not represent all populations equally</li>
+                            <li>Individual variations and unique medical histories may not be adequately captured</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2><i class="fas fa-chart-bar me-2"></i> Understanding Your Results</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3>Risk Levels</h3>
+                        
+                        <div class="card mb-3 border-danger">
+                            <div class="card-header bg-danger text-white">
+                                High Risk (≥70%)
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    A high-risk result indicates a significant probability of coronary heart disease. 
+                                    It is recommended to consult with a healthcare professional as soon as possible for a comprehensive evaluation.
+                                </p>
+                                <p>
+                                    <strong>Recommended Actions:</strong>
+                                </p>
+                                <ul>
+                                    <li>Schedule an appointment with a cardiologist</li>
+                                    <li>Follow up with additional diagnostic tests as recommended by your doctor</li>
+                                    <li>Review and modify lifestyle factors that may be contributing to risk</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-3 border-warning">
+                            <div class="card-header bg-warning text-dark">
+                                Moderate Risk (50-69%)
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    A moderate-risk result suggests that there are some concerning factors that may increase your risk of heart disease. 
+                                    It is advisable to discuss these results with your healthcare provider.
+                                </p>
+                                <p>
+                                    <strong>Recommended Actions:</strong>
+                                </p>
+                                <ul>
+                                    <li>Schedule a check-up with your primary care physician</li>
+                                    <li>Consider lifestyle modifications to reduce risk factors</li>
+                                    <li>Monitor your blood pressure, cholesterol, and blood sugar regularly</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-3 border-success">
+                            <div class="card-header bg-success text-white">
+                                Low Risk (&lt;50%)
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    A low-risk result suggests that your current risk factors do not strongly indicate heart disease. 
+                                    However, it's still important to maintain heart-healthy habits and receive regular check-ups.
+                                </p>
+                                <p>
+                                    <strong>Recommended Actions:</strong>
+                                </p>
+                                <ul>
+                                    <li>Continue regular health check-ups</li>
+                                    <li>Maintain a heart-healthy lifestyle (balanced diet, regular exercise, avoid smoking)</li>
+                                    <li>Stay informed about heart disease prevention</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-3">
+                            <strong>Note:</strong> Risk percentages are estimates based on available data and are not definitive diagnoses. Always consult with healthcare professionals for proper medical advice.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2><i class="fas fa-code me-2"></i> Technical Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3>Technologies Used</h3>
+                        <ul>
+                            <li><strong>Backend:</strong> Flask (Python web framework)</li>
+                            <li><strong>Machine Learning:</strong> Scikit-learn, NumPy, Pandas</li>
+                            <li><strong>Frontend:</strong> HTML, CSS, JavaScript, Bootstrap</li>
+                            <li><strong>Model:</strong> Gradient Boosting Classifier</li>
+                        </ul>
+                        
+                        <h3>Data Processing</h3>
+                        <p>
+                            The data processing pipeline includes:
+                        </p>
+                        <ul>
+                            <li>Feature scaling to normalize numerical variables</li>
+                            <li>Missing value imputation using median values</li>
+                            <li>Categorical feature encoding</li>
+                            <li>Feature selection based on importance ranking</li>
+                        </ul>
+                        
+                        <h3>Model Training</h3>
+                        <p>
+                            The model was trained using a Gradient Boosting Classifier with hyperparameters optimized through grid search. 
+                            Cross-validation was performed to ensure model stability and generalizability.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Heart Disease Risk Assessment Tool</h4>
+                    <p>This tool is intended for educational purposes only and should not replace professional medical advice.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2025 Heart Health Analytics</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

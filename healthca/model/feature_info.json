@@ -1,0 +1,7 @@
+[
+    {"name": "age", "description": "Age of the patient"},
+    {"name": "sex", "description": "Gender of the patient (0=female, 1=male)"},
+    {"name": "cp", "description": "Chest pain type (0-3)"},
+    
+    {"name": "thal", "description": "Thalassemia (0-3)"}
+  ]

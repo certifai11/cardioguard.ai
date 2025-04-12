@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Wristband Heart Disease Risk Simulator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --low-risk-color: #28a745;
+            --moderate-risk-color: #ffc107;
+            --high-risk-color: #dc3545;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border: none;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            padding: 1.25rem 1.5rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+            color: #333;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .input-section {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            color: #333;
+        }
+
+        .input-field {
+            margin-bottom: 1.25rem;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 10px 0 20px;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e0e0e0;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0d6efd;
+            cursor: pointer;
+        }
+
+        .slider-range {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .input-with-reset {
+            position: relative;
+        }
+
+        .input-reset {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #0d6efd;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .form-control {
+            height: 45px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding-left: 12px;
+            font-size: 0.95rem;
+        }
+
+        .form-select {
+            height: 45px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding-left: 12px;
+            font-size: 0.95rem;
+            background-position: right 12px center;
+        }
+
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+            margin-top: 0.25rem;
+        }
+
+        .form-check-label {
+            margin-left: 0.25rem;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+        }
+
+        .results-section {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .result-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .result-item-label {
+            color: #555;
+        }
+
+        .result-item-value {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .risk-assessment {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .risk-level {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-level.low {
+            color: var(--low-risk-color);
+        }
+
+        .risk-level.moderate {
+            color: var(--moderate-risk-color);
+        }
+
+        .risk-level.high {
+            color: var(--high-risk-color);
+        }
+
+        .risk-meter {
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .risk-meter-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.6s ease;
+        }
+
+        .risk-meter-fill.low {
+            background-color: var(--low-risk-color);
+        }
+
+        .risk-meter-fill.moderate {
+            background-color: var(--moderate-risk-color);
+        }
+
+        .risk-meter-fill.high {
+            background-color: var(--high-risk-color);
+        }
+
+        .data-visualization {
+            margin-top: 2rem;
+        }
+
+        .chart-container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .chart-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chart-actions button {
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .chart-actions button:hover {
+            color: #0d6efd;
+        }
+
+        .chart {
+            height: 200px;
+            width: 100%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .input-section, .results-section {
+                padding: 1.25rem;
+            }
+            
+            .chart {
+                height: 180px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .input-section, .results-section {
+                padding: 1rem;
+            }
+            
+            .chart {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1><i class="fas fa-heartbeat me-2"></i> Smart Wristband Heart Disease Risk Simulator</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <p class="mb-4">Enter your profile to simulate 24 hours of data and assess heart disease risk.</p>
+        
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="simulator-form">
+                            <div class="input-field">
+                                <label class="input-label">Age (years)</label>
+                                <div class="input-with-reset">
+                                    <input type="number" class="form-control" id="age" value="45">
+                                    <button type="button" class="input-reset" title="Reset"><i class="fas fa-redo-alt"></i></button>
+                                </div>
+                                <div class="slider-container">
+                                    <input type="range" class="slider" id="age-slider" min="18" max="100" value="45">
+                                    <div class="slider-range">
+                                        <span>18</span>
+                                        <span>100</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="input-field">
+                                <label class="input-label">Weight (kg)</label>
+                                <div class="input-with-reset">
+                                    <input type="number" class="form-control" id="weight" value="125">
+                                    <button type="button" class="input-reset" title="Reset"><i class="fas fa-redo-alt"></i></button>
+                                </div>
+                                <div class="slider-container">
+                                    <input type="range" class="slider" id="weight-slider" min="40" max="150" value="125">
+                                    <div class="slider-range">
+                                        <span>40</span>
+                                        <span>150</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="input-field">
+                                <label class="input-label">Height (cm)</label>
+                                <div class="input-with-reset">
+                                    <input type="number" class="form-control" id="height" value="173.6">
+                                    <button type="button" class="input-reset" title="Reset"><i class="fas fa-redo-alt"></i></button>
+                                </div>
+                                <div class="slider-container">
+                                    <input type="range" class="slider" id="height-slider" min="140" max="200" value="173">
+                                    <div class="slider-range">
+                                        <span>140</span>
+                                        <span>200</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="input-field">
+                                <label class="input-label">Gender</label>
+                                <select class="form-select" id="gender">
+                                    <option value="male" selected>Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="smoking">
+                                    <label class="form-check-label" for="smoking">Smoking</label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="familyHistory">
+                                    <label class="form-check-label" for="familyHistory">Family History of Heart Disease</label>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary" id="run-simulation">Run Simulation</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="result-header">Simulation Summary</h5>
+                        
+                        <div class="result-item">
+                            <span class="result-item-label">Average Resting HR:</span>
+                            <span class="result-item-value">70.0 bpm</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-item-label">Average HRV (SDNN):</span>
+                            <span class="result-item-value">53.0 ms</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-item-label">Average SpO2:</span>
+                            <span class="result-item-value">96.1%</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-item-label">Total Steps:</span>
+                            <span class="result-item-value">7238</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-item-label">Sleep Duration:</span>
+                            <span class="result-item-value">6.0 hours</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-item-label">BMI:</span>
+                            <span class="result-item-value">41.5</span>
+                        </div>
+                        
+                        <div class="risk-assessment mt-4">
+                            <h5 class="mb-3">Heart Disease Risk Assessment</h5>
+                            
+                            <div class="risk-level low">Risk Level: Low</div>
+                            <div class="mb-2">Risk Score: 15</div>
+                            
+                            <div class="risk-meter">
+                                <div class="risk-meter-fill low" style="width: 15%;"></div>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <strong>Contributing Factors:</strong>
+                                <ul class="mt-2 mb-0">
+                                    <li>Obesity (BMI > 30)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-visualization">
+                    <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Data Visualization</h5>
+                    
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span class="chart-title">Heart Rate (bpm)</span>
+                            <div class="chart-actions">
+                                <button title="Fullscreen"><i class="fas fa-expand"></i></button>
+                                <button title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart" id="heart-rate-chart">
+                            <!-- Heart rate chart will be rendered here -->
+                            <img src="/api/placeholder/700/200" alt="Heart Rate Chart" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span class="chart-title">SpO2 (%)</span>
+                            <div class="chart-actions">
+                                <button title="Fullscreen"><i class="fas fa-expand"></i></button>
+                                <button title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart" id="spo2-chart">
+                            <!-- SpO2 chart will be rendered here -->
+                            <img src="/api/placeholder/700/200" alt="SpO2 Chart" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span class="chart-title">Steps</span>
+                            <div class="chart-actions">
+                                <button title="Fullscreen"><i class="fas fa-expand"></i></button>
+                                <button title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart" id="steps-chart">
+                            <!-- Steps chart will be rendered here -->
+                            <img src="/api/placeholder/700/200" alt="Steps Chart" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Connect sliders to input fields
+            const connectSliderToInput = (sliderId, inputId) => {
+                const slider = document.getElementById(sliderId);
+                const input = document.getElementById(inputId);
+                
+                slider.addEventListener('input', () => {
+                    input.value = slider.value;
+                });
+                
+                input.addEventListener('input', () => {
+                    slider.value = input.value;
+                });
+                
+                // Reset buttons
+                const resetBtn = input.nextElementSibling;
+                resetBtn.addEventListener('click', () => {
+                    input.value = slider.getAttribute('value');
+                    slider.value = slider.getAttribute('value');
+                });
+            };
+            
+            connectSliderToInput('age-slider', 'age');
+            connectSliderToInput('weight-slider', 'weight');
+            connectSliderToInput('height-slider', 'height');
+            
+            // Run simulation button
+            document.getElementById('run-simulation').addEventListener('click', function() {
+                // Here you would normally send data to the backend
+                // For this demo, we'll just show an alert
+                alert('Simulation complete! Results updated.');
+                
+                // In a real app, you would update the results and charts with data from the backend
+            });
+        });
+    </script>
+</body>
+</html>
