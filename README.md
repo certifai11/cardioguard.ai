@@ -43,6 +43,17 @@ DevOps -Jenkins
 MLOps
 Terraform .tf
 
+This Terraform script sets up the following AWS components:
+
+An S3 bucket for storing customer transaction data.
+An API Gateway to handle incoming requests.
+A Lambda function to process the transactions.
+A SageMaker endpoint and model for machine learning analysis.
+A SageMaker notebook instance for data exploration and model development.
+
+
+
+
 Infra:
 
 HD_Prediction_Model/ ├── data/ │ ├── raw/ │ ├── processed/ ├── notebooks/ │ ├── data_exploration.ipynb │ ├── model_training.ipynb ├── src/ │ ├── data_preprocessing.py │ ├── model.py │ ├── train.py │ ├── evaluate.py ├── models/ │ ├── trained_model.pkl ├── scripts/ │ ├── download_data.sh │ ├── preprocess_data.sh ├── tests/ │ ├── test_data_preprocessing.py │ ├── test_model.py ├── requirements.txt ├── Dockerfile ├── Jenkinsfile ├── README.md
